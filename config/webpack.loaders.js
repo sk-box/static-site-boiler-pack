@@ -1,15 +1,15 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const config = require('./site.config');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const config = require("./site.config");
 
 // Define common loader constants
-const sourceMap = config.env !== 'production';
+const sourceMap = config.env !== "production";
 
 // HTML loaders
 const html = {
   test: /\.(html)$/,
   use: [
     {
-      loader: 'html-loader',
+      loader: "html-loader",
       options: {
         interpolate: true,
       },
@@ -23,41 +23,42 @@ const js = {
   exclude: /node_modules/,
   use: [
     {
-      loader: 'babel-loader',
+      loader: "babel-loader",
       options: {
-        presets: ['@babel/preset-env'],
+        presets: ["@babel/preset-env"],
       },
     },
-    'eslint-loader',
+    "eslint-loader",
   ],
 };
 
 // Style loaders
 const styleLoader = {
-  loader: 'style-loader'
+  loader: "style-loader",
 };
 
 const cssLoader = {
-  loader: 'css-loader',
+  loader: "css-loader",
   options: {
     sourceMap,
+    minimize: false,
   },
 };
 
 const postcssLoader = {
-  loader: 'postcss-loader',
+  loader: "postcss-loader",
   options: {
-    plugins: [
-      require('autoprefixer')(),
-    ],
+    plugins: [require("autoprefixer")()],
     sourceMap,
+    minimize: false,
   },
 };
 
 const css = {
   test: /\.css$/,
   use: [
-    config.env === 'production' ? MiniCssExtractPlugin.loader : styleLoader,
+    config.env === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    styleLoader,
     cssLoader,
     postcssLoader,
   ],
@@ -66,12 +67,14 @@ const css = {
 const sass = {
   test: /\.s[c|a]ss$/,
   use: [
-    config.env === 'production' ? MiniCssExtractPlugin.loader : styleLoader,
+    config.env === "production" ? MiniCssExtractPlugin.loader : styleLoader,
     cssLoader,
     postcssLoader,
     {
-      loader: 'sass-loader',
+      loader: "sass-loader",
       options: {
+        outputStyle: "expanded",
+        minimize: false,
         sourceMap,
       },
     },
@@ -81,11 +84,11 @@ const sass = {
 const less = {
   test: /\.less$/,
   use: [
-    config.env === 'production' ? MiniCssExtractPlugin.loader : styleLoader,
+    config.env === "production" ? MiniCssExtractPlugin.loader : styleLoader,
     cssLoader,
     postcssLoader,
     {
-      loader: 'less-loader',
+      loader: "less-loader",
       options: {
         sourceMap,
       },
@@ -95,7 +98,7 @@ const less = {
 
 // Image loaders
 const imageLoader = {
-  loader: 'image-webpack-loader',
+  loader: "image-webpack-loader",
   options: {
     bypassOnDebug: true,
     gifsicle: {
@@ -105,7 +108,7 @@ const imageLoader = {
       optimizationLevel: 7,
     },
     pngquant: {
-      quality: '65-90',
+      quality: "65-90",
       speed: 4,
     },
     mozjpeg: {
@@ -118,8 +121,8 @@ const images = {
   test: /\.(gif|png|jpe?g|svg)$/i,
   exclude: /fonts/,
   use: [
-    'file-loader?name=images/[name].[hash].[ext]',
-    config.env === 'production' ? imageLoader : null,
+    "file-loader?name=images/[name].[hash].[ext]",
+    config.env === "production" ? imageLoader : null,
   ].filter(Boolean),
 };
 
@@ -129,10 +132,10 @@ const fonts = {
   exclude: /images/,
   use: [
     {
-      loader: 'file-loader',
+      loader: "file-loader",
       query: {
-        name: '[name].[hash].[ext]',
-        outputPath: 'fonts/',
+        name: "[name].[hash].[ext]",
+        outputPath: "fonts/",
       },
     },
   ],
@@ -143,22 +146,13 @@ const videos = {
   test: /\.(mp4|webm)$/,
   use: [
     {
-      loader: 'file-loader',
+      loader: "file-loader",
       query: {
-        name: '[name].[hash].[ext]',
-        outputPath: 'images/',
+        name: "[name].[hash].[ext]",
+        outputPath: "images/",
       },
     },
   ],
 };
 
-module.exports = [
-  html,
-  js,
-  css,
-  sass,
-  less,
-  images,
-  fonts,
-  videos,
-];
+module.exports = [html, js, css, sass, less, images, fonts, videos];

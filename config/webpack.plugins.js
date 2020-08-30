@@ -139,7 +139,8 @@ module.exports = [
   cssExtract,
   ...generateHTMLPlugins(),
   fs.existsSync(config.favicon) && favicons,
-  config.env === "production" && optimizeCss,
+  // not use css minify
+  // config.env === "production" && optimizeCss,
   config.env === "production" && robots,
   config.env === "production" && sitemap,
   config.googleAnalyticsUA && google,

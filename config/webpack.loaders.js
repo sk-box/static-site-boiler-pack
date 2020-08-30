@@ -1,17 +1,30 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const config = require("./site.config");
+const path = require("path");
 
 // Define common loader constants
 const sourceMap = config.env !== "production";
 
 // HTML loaders
-const html = {
-  test: /\.(html)$/,
+// const html = {
+//   test: /\.(html)$/,
+//   use: [
+//     {
+//       loader: "html-loader",
+//       options: {
+//         interpolate: true,
+//       },
+//     },
+//   ],
+// };
+
+const pug = {
+  test: /\.pug$/,
   use: [
     {
-      loader: "html-loader",
+      loader: "pug-loader",
       options: {
-        interpolate: true,
+        pretty: true,
       },
     },
   ],
@@ -154,4 +167,4 @@ const videos = {
   ],
 };
 
-module.exports = [html, js, css, sass, less, images, fonts, videos];
+module.exports = [pug, js, css, sass, less, images, fonts, videos];

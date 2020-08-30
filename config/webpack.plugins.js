@@ -56,16 +56,23 @@ const cssExtract = new MiniCssExtractPlugin({
 // HTML generation
 const paths = [];
 const generateHTMLPlugins = () =>
-  glob.sync("./src/**/*.html").map((dir) => {
-    const filename = path.basename(dir);
+  glob.sync("./src/pug/**/*.pug").map((dir) => {
+    const distPath = dir.replace("./src/pug/", "").replace(".pug", ".html");
+    const templatePath = dir.replace("/src", "/");
 
-    if (filename !== "404.html") {
-      paths.push(filename);
+    if (path.dirname(distPath) === "component") {
+      return;
     }
+    // if (filename !== "404.html") {
+    //   paths.push(compiledfile);
+    // }
+
+    paths.push(path.basename(distPath));
 
     return new HTMLWebpackPlugin({
-      filename,
-      template: path.join(config.root, config.paths.src, filename),
+      filename: distPath,
+      template: templatePath,
+      minify: false,
       meta: {
         viewport: config.viewport,
       },

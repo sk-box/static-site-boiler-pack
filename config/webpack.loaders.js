@@ -41,7 +41,6 @@ const cssLoader = {
   loader: "css-loader",
   options: {
     sourceMap,
-    minimize: false,
   },
 };
 

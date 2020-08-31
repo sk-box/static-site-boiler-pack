@@ -167,4 +167,4 @@ const videos = {
   ],
 };
 
-module.exports = [htmlm, pug, js, css, sass, less, images, fonts, videos];
+module.exports = [html, pug, js, css, sass, less, images, fonts, videos];

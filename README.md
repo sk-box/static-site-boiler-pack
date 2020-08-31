@@ -3,6 +3,7 @@
 boilertemplate for static site
 
 base: https://staticsiteboilerplate.com/
+
 https://docs.staticsiteboilerplate.com/
 
 # changes
@@ -14,7 +15,9 @@ https://docs.staticsiteboilerplate.com/
 # usage
 
 ```
-git clone https://github.com/sk-box/static-site-boiler-pack.git && cd static-site-boiler-pack && rm -rf .git && git init
+git clone https://github.com/sk-box/static-site-boiler-pack.git
+&& cd static-site-boiler-pack
+&& rm -rf .git && git init
 
 npm install
 

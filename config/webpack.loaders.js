@@ -6,17 +6,17 @@ const path = require("path");
 const sourceMap = config.env !== "production";
 
 // HTML loaders
-// const html = {
-//   test: /\.(html)$/,
-//   use: [
-//     {
-//       loader: "html-loader",
-//       options: {
-//         interpolate: true,
-//       },
-//     },
-//   ],
-// };
+const html = {
+  test: /\.(html)$/,
+  use: [
+    {
+      loader: "html-loader",
+      options: {
+        interpolate: true,
+      },
+    },
+  ],
+};
 
 const pug = {
   test: /\.pug$/,
@@ -167,4 +167,4 @@ const videos = {
   ],
 };
 
-module.exports = [pug, js, css, sass, less, images, fonts, videos];
+module.exports = [htmlm, pug, js, css, sass, less, images, fonts, videos];

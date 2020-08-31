@@ -60,14 +60,14 @@ const generateHTMLPlugins = () =>
     const distPath = dir.replace("./src/pug/", "").replace(".pug", ".html");
     const templatePath = dir.replace("/src", "/");
 
-    if (path.dirname(distPath) === "component") {
+    if (
+      path.dirname(distPath) === "component" ||
+      path.dirname(distPath) === "layout"
+    ) {
       return;
     }
-    // if (filename !== "404.html") {
-    //   paths.push(compiledfile);
-    // }
 
-    paths.push(path.basename(distPath));
+    paths.push(distPath);
 
     return new HTMLWebpackPlugin({
       filename: distPath,
